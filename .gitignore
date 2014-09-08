@@ -1,0 +1,4 @@
+# sbt stuff
+src_managed/
+target/
+project/target/
