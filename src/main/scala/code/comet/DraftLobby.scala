@@ -24,6 +24,8 @@ final case class StartGame(game: OpenGame)
 final case class WaitingOnGame(game: OpenGame)
 final case class LeaveOpenGame(game: OpenGame, who: CometActor)
 
+object DraftActor extends SessionVar[Box[CometActor]](Empty)
+
 object LobbyServer extends LiftActor {
   
   private var games: List[OpenGame] = Nil
@@ -123,6 +125,7 @@ class DraftLobby extends CometActor {
     }
     case StartGame(openGame: OpenGame) => {
       CurrentGame.set(Full(openGame))
+      DraftActor.is.foreach(Lobby ! AttemptJoin(openGame, _))
       partialUpdate(RedirectTo("/winston-draft.html"))
     }
     case WaitingOnGame(game: OpenGame) => {

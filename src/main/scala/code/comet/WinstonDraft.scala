@@ -378,6 +378,7 @@ class WinstonDraft extends CometActor {
   override def lifespan: Box[TimeSpan] = Full(2 minutes)
   
   override def localSetup(){
+    DraftActor.set(Full(this))
     openGame match {
       case Full(g) => {
         Lobby ! AttemptJoin(g, this)
