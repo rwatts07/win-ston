@@ -215,6 +215,7 @@ class WinstonDraft extends CometActor {
       DeckList.set(Empty)
       FileName.set(Empty)
       CurrentGame.set(Empty)
+      LobbyActor.is.foreach(LobbyServer ! JoinLobby(_))
       partialUpdate(RedirectTo("/draftLobby.html"))
     }
   }

@@ -59,7 +59,8 @@ object LobbyServer extends LiftActor {
     }
   }
 }
-  
+
+object LobbyActor extends SessionVar[Box[CometActor]](Empty)
 
 class DraftLobby extends CometActor {
 
@@ -131,6 +132,7 @@ class DraftLobby extends CometActor {
   }
 
   override def localSetup() {
+    LobbyActor.set(Full(this))
     LobbyServer ! JoinLobby(this)
     CurrentGame.set(Empty)
     super.localSetup()
