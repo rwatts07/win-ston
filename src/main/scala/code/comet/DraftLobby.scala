@@ -198,8 +198,6 @@ object ValidCards {
 
   val bucketName = "cardjson"
 
-  val awsId = "AKIAJYFJPRZKHY2HHMLA"
-  val awsKey = "lbMSnsnddhFOOqerxp7BxCGADTYB0T5+5UV6tYPp"
   val credentials = new BasicAWSCredentials(awsId, awsKey)
   val conn = new AmazonS3Client(credentials)
 
